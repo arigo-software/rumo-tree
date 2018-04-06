@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="playground-polymer">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `playground-polymer`
+     * Playground for Polymer 2.0
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PlaygroundPolymer extends Polymer.Element {
+      static get is() { return 'playground-polymer'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'playground-polymer'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PlaygroundPolymer.is, PlaygroundPolymer);
+  </script>
+</dom-module>
