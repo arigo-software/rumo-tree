@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/stefanfrede/playground-polymer/issues"
   },
-  "homepage": "https://github.com/stefanfrede/playground-polymer#readme"
+  "homepage": "https://github.com/stefanfrede/playground-polymer#readme",
+  "devDependencies": {
+    "bower": "^1.8.4"
+  }
 }
