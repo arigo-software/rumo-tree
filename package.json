@@ -1,0 +1,22 @@
+{
+  "name": "playground-polymer",
+  "version": "1.0.0",
+  "description": "Playground for Polymer 2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanfrede/playground-polymer.git"
+  },
+  "keywords": [
+    "polymer"
+  ],
+  "author": "Stefan Frede",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanfrede/playground-polymer/issues"
+  },
+  "homepage": "https://github.com/stefanfrede/playground-polymer#readme"
+}
