@@ -1,0 +1,12 @@
+{
+  "extends": ["plugin:polymer/polymer-2"],
+  "plugins": [
+    "polymer"
+  ],
+  "rules": {
+    "require-jsdoc": 0
+  },
+  "settings": {
+    "html/html-extensions": [".html"]
+  }
+}

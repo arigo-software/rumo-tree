@@ -20,13 +20,15 @@
      * @demo demo/index.html
      */
     class PlaygroundPolymer extends Polymer.Element {
-      static get is() { return 'playground-polymer'; }
+      static get is() {
+        return 'playground-polymer';
+      }
       static get properties() {
         return {
           prop1: {
             type: String,
-            value: 'playground-polymer'
-          }
+            value: 'playground-polymer',
+          },
         };
       }
     }

@@ -4,7 +4,13 @@
   "description": "Playground for Polymer 2.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.html": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -21,6 +27,10 @@
   "homepage": "https://github.com/stefanfrede/playground-polymer#readme",
   "devDependencies": {
     "bower": "^1.8.4",
+    "eslint": "^4.19.1",
+    "eslint-plugin-polymer": "^0.2.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.4",
     "polymer-cli": "^1.6.0"
   }
 }
