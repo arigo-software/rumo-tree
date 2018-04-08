@@ -9,6 +9,7 @@
   "lint-staged": {
     "*.html": [
       "eslint --fix",
+      "stylelint --fix",
       "git add"
     ]
   },
@@ -34,6 +35,9 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.0.4",
     "polymer-cli": "^1.6.0",
-    "prettier": "1.11.1"
+    "prettier": "1.11.1",
+    "stylelint": "^9.2.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-order": "^0.8.1"
   }
 }
