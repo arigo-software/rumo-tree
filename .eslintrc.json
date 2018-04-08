@@ -1,5 +1,8 @@
 {
-  "extends": ["plugin:polymer/polymer-2"],
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:polymer/polymer-2"
+  ],
   "plugins": [
     "polymer"
   ],
