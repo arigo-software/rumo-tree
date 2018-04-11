@@ -1,0 +1,172 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+
+<link rel="import" href="../shadycss/apply-shim.html">
+
+<dom-module id="playground-polymer-node">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      :host(.selected) {
+        background-color: var(--paper-tree-selected-background-color, rgba(200, 200, 200, 0.5));
+        color: var(--paper-tree-selected-color, inherit);
+      }
+
+      .node-preicon.collapsed,
+      .node-preicon.expanded {
+        padding-left: 0px;
+      }
+
+      .node-preicon {
+        padding-left: 18px;
+      }
+
+      .node-preicon::before {
+        margin-right: 5px;
+
+        @apply(--paper-tree-toggle-theme);
+      }
+
+      .node-preicon.collapsed::before {
+        content: '\002B';
+      }
+
+      .node-preicon.expanded::before {
+        content: '\2212';
+      }
+
+      .node-preicon, .node-name {
+        cursor: pointer;
+      }
+
+      .node-icon {
+        cursor: pointer;
+        height: 24px;
+        width: 24px;
+
+        @apply(--paper-tree-icon-theme);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li {
+        list-style-type: none;
+      }
+
+      [hidden] {
+        display: none;
+      }
+    </style>
+    <div class="node-container">
+      <div class="node-row">
+        <span
+          class$="{{_computeClass(data.*)}}"
+          on-click="toggleChildren"></span>
+        <iron-icon
+          class="node-icon"
+          icon$="{{_computeIcon(data.icon)}}"
+          on-click="select"></iron-icon>
+        <span class="node-name" on-click="select">
+          {{data.name}}
+        </span>
+      </div>
+      <template is="dom-if" if="{{data.open}}">
+        <ul>
+          <template is="dom-repeat" items="{{data.children}}">
+            <li>
+              <playground-polymer-node
+                data="{{item}}"></playground-polymer-node>
+            </li>
+          </template>
+        </ul>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `playground-polymer-node`
+     * Playground for Polymer 2.0
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PlaygroundPolymerNode extends Polymer.Element {
+      static get is() {
+        return 'playground-polymer-node';
+      }
+
+      static get properties() {
+        return {
+          data: {
+            type: Object,
+            value() {
+              return {};
+            },
+          },
+        };
+      }
+
+      _computeClass(change) {
+        const open = change && change.base && change.base.open;
+        const children = change && change.base && change.base.children;
+
+        return (
+          'node-preicon ' +
+          (open && children && children.length
+            ? 'expanded'
+            : children && children.length ? 'collapsed' : '')
+        );
+      }
+
+      _computeIcon(icon) {
+        return icon ? icon : 'folder';
+      }
+
+      select() {
+        this.dispatchEvent(
+          new CustomEvent('select', {
+            bubbles: true,
+            composed: true,
+            detail: this,
+          })
+        );
+      }
+
+      getParent() {
+        return this.domHost.tagName === 'PLAYGROUND-POLYMER-NODE'
+          ? this.domHost
+          : null;
+      }
+
+      getChildren() {
+        return this.$.root.querySelectorAll('playground-polymer-node');
+      }
+
+      toggleChildren() {
+        this.set(
+          'data.open',
+          !this.data.open && this.data.children && this.data.children.length
+        );
+
+        this.dispatchEvent(
+          new CustomEvent('toggle', {
+            bubbles: true,
+            composed: true,
+            detail: this,
+          })
+        );
+      }
+    }
+
+    window.customElements.define(PlaygroundPolymerNode.is, PlaygroundPolymerNode);
+  </script>
+</dom-module>

@@ -13,8 +13,7 @@
     <link rel="import" href="../playground-polymer.html">
 
     <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
+      <style is="custom-style" include="demo-pages-shared-styles"></style>
     </custom-style>
   </head>
   <body>
@@ -22,7 +21,25 @@
       <h3>Basic playground-polymer demo</h3>
       <demo-snippet>
         <template>
-          <playground-polymer></playground-polymer>
+          <playground-polymer id="tree"></playground-polymer>
+          <script>
+            const tree = document.getElementById('tree');
+
+            tree.data = {
+              name: 'Hello',
+              children: [
+                {
+                  name: 'World',
+                },
+                {
+                  name: 'There',
+                },
+                {
+                  name: 'You',
+                },
+              ],
+            };
+          </script>
         </template>
       </demo-snippet>
     </div>

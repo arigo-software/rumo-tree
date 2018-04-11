@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="playground-polymer-node.html">
 
 <dom-module id="playground-polymer">
   <template>
@@ -7,7 +8,7 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <playground-polymer-node id="root" data="[[data]]"></playground-polymer-node>
   </template>
 
   <script>
@@ -23,13 +24,46 @@
       static get is() {
         return 'playground-polymer';
       }
+
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'playground-polymer',
+          data: {
+            type: Object,
+            value() {
+              return {};
+            },
+            observer: '_dataChanged',
+          },
+
+          selected: {
+            type: Object,
+            notify: true,
+            value() {
+              return null;
+            },
           },
         };
+      }
+
+      ready() {
+        super.ready();
+
+        this.addEventListener('select', this._selectNode);
+      }
+
+      _dataChanged() {
+        this.$.root.data = this.data;
+      }
+
+      _selectNode(e) {
+        if (this.selected) {
+          this.selected.classList.toggle('selected');
+        }
+
+        if (e.detail && e.detail.tagName === 'PLAYGROUND-POLYMER-NODE') {
+          this.selected = e.detail;
+          this.selected.classList.toggle('selected');
+        }
       }
     }
 
