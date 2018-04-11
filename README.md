@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/stefanfrede/playground-polymer.svg?branch=master)](https://travis-ci.org/stefanfrede/playground-polymer)
 [![Build Status](https://saucelabs.com/buildstatus/stefanfrede)](https://saucelabs.com/beta/builds/70c0790efe1d45feaf73677cd6caff2b)
 
 # \<playground-polymer\>
