@@ -1,6 +1,10 @@
 {
   "extends": [
-    "stylelint-config-recommended"
+    "stylelint-config-recommended",
+    "stylelint-config-prettier"
+  ],
+  "processors": [
+    "@mapbox/stylelint-processor-arbitrary-tags"
   ],
   "plugins": [
     "stylelint-order"
@@ -10,6 +14,7 @@
       "custom-properties",
       "declarations"
     ],
-    "order/properties-alphabetical-order": true
+    "order/properties-alphabetical-order": true,
+    "no-empty-source": null
   }
 }
