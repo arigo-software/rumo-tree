@@ -4,13 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
+    <title>
+      rumo-tree test
+    </title>
+
     <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
   </head>
   <body>
     <script>
       // Load and run all tests (.html, .js):
-      WCT.loadSuites(['rumo-tree_test.html']);
+      WCT.loadSuites([
+        // Load 'basic-view.html' test suite, using native shadow dom
+        'rumo-tree_test.html?dom=shadow',
+        // Load 'basic-view.html' test suite, using shadydom
+        'rumo-tree_test.html?wc-shadydom=true',
+      ]);
     </script>
   </body>
 </html>
