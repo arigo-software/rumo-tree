@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>rumo-tree test</title>
+    <title>
+      rumo-tree test
+    </title>
 
     <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
@@ -12,7 +14,6 @@
     <link rel="import" href="../rumo-tree.html">
   </head>
   <body>
-
     <test-fixture id="BasicTestFixture">
       <template>
         <rumo-tree></rumo-tree>
@@ -21,7 +22,7 @@
 
     <test-fixture id="ChangedPropertyTestFixture">
       <template>
-        <rumo-tree prop1="new-prop1"></rumo-tree>
+        <rumo-tree data='{"icon":"arrow-back","name":"eert-omur"}'></rumo-tree>
       </template>
     </test-fixture>
 
@@ -29,22 +30,17 @@
       suite('rumo-tree', () => {
         test('instantiating the element with default properties works', () => {
           const element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'rumo-tree');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello rumo-tree!');
+          assert.deepEqual(element.data, {});
+          assert.equal(element.selected, null);
         });
 
         test('setting a property on the element works', () => {
           // Create a test fixture
           const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
+          assert.equal(element.data.icon, 'arrow-back');
+          assert.equal(element.data.name, 'eert-omur');
         });
       });
     </script>
-
   </body>
 </html>
