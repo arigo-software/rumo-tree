@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../paper-styles/default-theme.html">
+<link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
@@ -10,8 +10,14 @@
   <template strip-whitespace>
     <style>
       :host {
-        @apply --paper-font-common-base;
+        /**
+         * Typography settings
+         */
+        @apply --paper-font-body1;
 
+        /**
+         * Generic variables for easy theming
+         */
         --primary-text-color: var(--light-theme-text-color);
         --primary-background-color: var(--light-theme-background-color);
         --secondary-text-color: var(--light-theme-secondary-color);
@@ -19,15 +25,39 @@
         --divider-color: var(--light-theme-divider-color);
         --error-color: var(--paper-deep-orange-a700);
 
+        /**
+         * Primary and accent colors
+         */
+        --primary-color: var(--paper-blue-500);
+        --light-primary-color: var(--paper-blue-100);
+        --dark-primary-color: var(--paper-blue-700);
+
+        --accent-color: var(--paper-blue-a200);
+        --light-accent-color: var(--paper-blue-a100);
+        --dark-accent-color: var(--paper-blue-a400);
+
+        /**
+         * Light background theme
+         */
+        --light-theme-background-color: #ffffff;
+        --light-theme-base-color: #000000;
+        --light-theme-text-color: var(--paper-grey-900);
+        --light-theme-secondary-color: var(--paper-grey-600);
+        --light-theme-disabled-color: var(--paper-grey-500);
+        --light-theme-divider-color: #dbdbdb;
+
+        /**
+         * Color transition for hover effects
+         */
         --color-transition: color 0.25s ease-out;
 
         background-color: var(--primary-background-color);
         color: var(--primary-text-color);
         display: inline-block;
-        font-size: 14px;
       }
 
-      :host(.selected) .node__label {
+      :host(.selected) .node__label .node__icon,
+      :host(.selected) .node__label .node__name {
         color: var(--primary-color);
       }
 
@@ -58,7 +88,7 @@
       }
 
       .node__status:hover > .node__icon {
-        color: var(--accent-color);
+        color: var(--dark-accent-color);
       }
 
       .node__status--collapsed .node__icon--open,
@@ -72,6 +102,7 @@
       }
 
       .node__icon {
+        color: var(--secondary-text-color);
         height: 24px;
         width: 24px;
       }
@@ -88,8 +119,9 @@
         transition: var(--color-transition);
       }
 
-      .node__label:hover {
-        color: var(--accent-color) !important;
+      .node__label:hover .node__icon,
+      .node__label:hover .node__name {
+        color: var(--dark-accent-color) !important;
       }
 
       .node__name {
