@@ -6,7 +6,7 @@
 
 <link rel="import" href="../shadycss/apply-shim.html">
 
-<dom-module id="playground-polymer-node">
+<dom-module id="rumo-tree-item">
   <template strip-whitespace>
     <style>
       :host {
@@ -147,24 +147,16 @@
     <template is="dom-if" if="{{data.open}}">
       <div class="node__children-container">
         <template is="dom-repeat" items="{{data.children}}">
-          <playground-polymer-node data="{{item}}"></playground-polymer-node>
+          <rumo-tree-item data="{{item}}"></rumo-tree-item>
         </template>
       </div>
     </template>
   </template>
 
   <script>
-    /**
-     * `playground-polymer-node`
-     * Playground for Polymer 2.0
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
-    class PlaygroundPolymerNode extends Polymer.Element {
+    class RumoTreeItem extends Polymer.Element {
       static get is() {
-        return 'playground-polymer-node';
+        return 'rumo-tree-item';
       }
 
       static get properties() {
@@ -231,16 +223,14 @@
       }
 
       getParent() {
-        return this.domHost.tagName === 'PLAYGROUND-POLYMER-NODE'
-          ? this.domHost
-          : null;
+        return this.domHost.tagName === 'RUMO-TREE-ITEM' ? this.domHost : null;
       }
 
       getChildren() {
-        return this.$.root.querySelectorAll('playground-polymer-node');
+        return this.$.root.querySelectorAll('rumo-tree-item');
       }
     }
 
-    window.customElements.define(PlaygroundPolymerNode.is, PlaygroundPolymerNode);
+    window.customElements.define(RumoTreeItem.is, RumoTreeItem);
   </script>
 </dom-module>

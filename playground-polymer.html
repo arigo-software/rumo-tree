@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="playground-polymer-node.html">
+<link rel="import" href="rumo-tree-item.html">
 
 <dom-module id="playground-polymer">
   <template>
@@ -8,7 +8,7 @@
         display: block;
       }
     </style>
-    <playground-polymer-node id="root" data="[[data]]"></playground-polymer-node>
+    <rumo-tree-item id="root" data="[[data]]"></rumo-tree-item>
   </template>
 
   <script>
@@ -60,7 +60,7 @@
           this.selected.classList.toggle('selected');
         }
 
-        if (e.detail && e.detail.tagName === 'PLAYGROUND-POLYMER-NODE') {
+        if (e.detail && e.detail.tagName === 'RUMO-TREE-ITEM') {
           this.selected = e.detail;
           this.selected.classList.toggle('selected');
         }
