@@ -1,93 +1,124 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-styles/default-theme.html">
+<link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 
 <link rel="import" href="../shadycss/apply-shim.html">
 
 <dom-module id="playground-polymer-node">
-  <template>
+  <template strip-whitespace>
     <style>
       :host {
-        display: block;
+        @apply --paper-font-common-base;
+
+        --primary-text-color: var(--light-theme-text-color);
+        --primary-background-color: var(--light-theme-background-color);
+        --secondary-text-color: var(--light-theme-secondary-color);
+        --disabled-text-color: var(--light-theme-disabled-color);
+        --divider-color: var(--light-theme-divider-color);
+        --error-color: var(--paper-deep-orange-a700);
+
+        --color-transition: color 0.25s ease-out;
+
+        background-color: var(--primary-background-color);
+        color: var(--primary-text-color);
+        display: inline-block;
+        font-size: 14px;
       }
 
-      :host(.selected) {
-        background-color: var(--paper-tree-selected-background-color, rgba(200, 200, 200, 0.5));
-        color: var(--paper-tree-selected-color, inherit);
+      :host(.selected) .node__label {
+        color: var(--primary-color);
       }
 
-      .node-preicon.collapsed,
-      .node-preicon.expanded {
-        padding-left: 0px;
+      .node__data-container {
+        align-items: center;
+        display: flex;
       }
 
-      .node-preicon {
-        padding-left: 18px;
+      .node__children-container {
+        display: flex;
+        flex-direction: column;
+        padding-left: 24px;
       }
 
-      .node-preicon::before {
-        margin-right: 5px;
-
-        @apply --paper-tree-toggle-theme;
-      }
-
-      .node-preicon.collapsed::before {
-        content: '\002B';
-      }
-
-      .node-preicon.expanded::before {
-        content: '\2212';
-      }
-
-      .node-preicon, .node-name {
+      .node__status {
+        align-items: center;
         cursor: pointer;
-      }
-
-      .node-icon {
-        cursor: pointer;
+        display: flex;
         height: 24px;
+        justify-content: center;
         width: 24px;
-
-        @apply --paper-tree-icon-theme;
       }
 
-      ul {
-        margin: 0;
-        padding-left: 20px;
+      .node__status > .node__icon {
+        color: var(--primary-text-color);
+        display: none;
+        transition: var(--color-transition);
       }
 
-      li {
-        list-style-type: none;
+      .node__status:hover > .node__icon {
+        color: var(--accent-color);
       }
 
-      [hidden] {
+      .node__status--collapsed .node__icon--open,
+      .node__status--expanded .node__icon--close {
+        display: inline-block;
+      }
+
+      .node__status--collapsed .node__icon--close,
+      .node__status--expanded .node__icon--open {
         display: none;
       }
+
+      .node__icon {
+        height: 24px;
+        width: 24px;
+      }
+
+      .node__icon--small {
+        height: 16px;
+        width: 16px;
+      }
+
+      .node__label {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        transition: var(--color-transition);
+      }
+
+      .node__label:hover {
+        color: var(--accent-color) !important;
+      }
+
+      .node__name {
+        margin-left: 0.45em;
+      }
     </style>
-    <div class="node-container">
-      <div class="node-row">
-        <span
-          class$="{{_computeClass(data.*)}}"
-          on-click="toggleChildren"></span>
+    <div class="node__data-container">
+      <div class$="{{open}}" on-click="_toggleChildren">
         <iron-icon
-          class="node-icon"
-          icon$="{{_computeIcon(data.icon)}}"
-          on-click="select"></iron-icon>
-        <span class="node-name" on-click="select">
+          class="node__icon node__icon--small node__icon--open"
+          icon="add"></iron-icon>
+        <iron-icon
+          class="node__icon node__icon--small node__icon--close"
+          icon="remove"></iron-icon>
+      </div>
+      <div class="node__label" on-click="_selectNode">
+        <iron-icon class="node__icon" icon$="{{icon}}"></iron-icon>
+        <span class="node__name">
           {{data.name}}
         </span>
       </div>
-      <template is="dom-if" if="{{data.open}}">
-        <ul>
-          <template is="dom-repeat" items="{{data.children}}">
-            <li>
-              <playground-polymer-node
-                data="{{item}}"></playground-polymer-node>
-            </li>
-          </template>
-        </ul>
-      </template>
     </div>
+    <template is="dom-if" if="{{data.open}}">
+      <div class="node__children-container">
+        <template is="dom-repeat" items="{{data.children}}">
+          <playground-polymer-node data="{{item}}"></playground-polymer-node>
+        </template>
+      </div>
+    </template>
   </template>
 
   <script>
@@ -112,18 +143,26 @@
               return {};
             },
           },
+          open: {
+            type: String,
+            computed: '_computeOpen(data.open, data.children)',
+          },
+          icon: {
+            type: String,
+            computed: '_computeIcon(data.icon)',
+          },
         };
       }
 
-      _computeClass(change) {
-        const open = change && change.base && change.base.open;
-        const children = change && change.base && change.base.children;
+      _computeOpen(status, children) {
+        const open = !!status;
+        const hasChildren = Array.isArray(children) && !!~children.length;
 
         return (
-          'node-preicon ' +
-          (open && children && children.length
-            ? 'expanded'
-            : children && children.length ? 'collapsed' : '')
+          'node__status ' +
+          (open && hasChildren
+            ? 'node__status--expanded'
+            : hasChildren ? 'node__status--collapsed' : '')
         );
       }
 
@@ -131,9 +170,27 @@
         return icon ? icon : 'folder';
       }
 
-      select() {
+      _selectNode() {
         this.dispatchEvent(
           new CustomEvent('select', {
+            bubbles: true,
+            composed: true,
+            detail: this,
+          })
+        );
+      }
+
+      _toggleChildren() {
+        const isClosed = !this.data.open;
+        const hasChildren =
+          Array.isArray(this.data.children) && !!~this.data.children.length;
+
+        const open = isClosed && hasChildren;
+
+        this.set('data.open', open);
+
+        this.dispatchEvent(
+          new CustomEvent('toggle', {
             bubbles: true,
             composed: true,
             detail: this,
@@ -149,21 +206,6 @@
 
       getChildren() {
         return this.$.root.querySelectorAll('playground-polymer-node');
-      }
-
-      toggleChildren() {
-        this.set(
-          'data.open',
-          !this.data.open && this.data.children && this.data.children.length
-        );
-
-        this.dispatchEvent(
-          new CustomEvent('toggle', {
-            bubbles: true,
-            composed: true,
-            detail: this,
-          })
-        );
       }
     }
 
