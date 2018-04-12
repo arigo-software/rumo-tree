@@ -1,7 +1,7 @@
 {
-  "name": "playground-polymer",
-  "description": "Playground for Polymer 2.0",
-  "main": "playground-polymer.html",
+  "name": "rumo-tree",
+  "description": "Simple tree view component with lazy-loading capability",
+  "main": "rumo-tree.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "iron-icons": "v2.1.1",

@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="rumo-tree-item.html">
 
-<dom-module id="playground-polymer">
+<dom-module id="rumo-tree">
   <template>
     <style>
       :host {
@@ -13,16 +13,16 @@
 
   <script>
     /**
-     * `playground-polymer`
-     * Playground for Polymer 2.0
+     * `rumo-tree`
+     * Simple tree view component with lazy-loading capability
      *
      * @customElement
      * @polymer
      * @demo demo/index.html
      */
-    class PlaygroundPolymer extends Polymer.Element {
+    class RumoTree extends Polymer.Element {
       static get is() {
-        return 'playground-polymer';
+        return 'rumo-tree';
       }
 
       static get properties() {
@@ -67,6 +67,6 @@
       }
     }
 
-    window.customElements.define(PlaygroundPolymer.is, PlaygroundPolymer);
+    window.customElements.define(RumoTree.is, RumoTree);
   </script>
 </dom-module>
