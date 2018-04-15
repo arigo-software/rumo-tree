@@ -3,7 +3,7 @@
 
 # \<rumo-tree\>
 
-Simple tree view component with lazy-loading capability
+Simple Polymer tree component
 
 ## Install the Polymer-CLI
 
