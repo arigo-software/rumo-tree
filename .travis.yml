@@ -1,21 +1,28 @@
 language: node_js
 sudo: required
 dist: trusty
-node_js: stable
+node_js: lts/*
 addons:
   chrome: stable
   firefox: latest
-  sauce_connect: true
 cache:
   directories:
-  - node_modules
+    - bower_components
+    - node_modules
+git:
+ depth: 1
+install:
+  - npm i -g bower polymer-cli
+  - npx polymer install
 before_script:
-- npm install polymer-cli
-- npx polymer install --variants
-- npx polymer lint
+  - npx polymer lint
 script:
-- xvfb-run npx polymer test --skip-plugin sauce
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then npx polymer test --skip-plugin local; fi
+  - xvfb-run npx polymer test
+  - if [ "${TRAVIS_BRANCH}" = "master" ] && [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then npx polymer test --plugin sauce; fi
+notifications:
+  email:
+    on_success: never
+    on_failure: always
 env:
   global:
   - secure: nrIrTfbt2AYVmk5BGRA7JozHXVI+DZ1Bw2L4jHLoE9Fy+IAJCFDhNrby5iYc7VFTFzusL5627+cfP11nlVjJtF7blI22un6cP4drhK4YrAV1tZxVr88mTcj7haZqNSQDHPxEhdDweOLejFeJIrFqQ+3oab47ChdNaotAq+7C9wqL/5BbN3JZ5MiJRFCoFcj3M2TCdRxFcuzNzHt2sAK83zPKFrrZIgY2YgsA34I6LULzON4+k3EXStCY1banwqFBz7iG8m0trW0NUUGbx10BAlPpdXJisLNQdEYNLZnwWTWhNvyG6lqU72ad+IAAyw/lsTptePUy9+lesk4Aa6ejsF3NPGYxnI//x6sjz6y7p7FDFd71BjgmW4oTph+Vnm2gMtdmQqkLAHs3HhHu1gsi6oNuz0KMp8QV9gXIVcySRt5V82W7wcwzzo1muCxRzoyxg35MRfY1oHtorm/jdiYuyPw63n+UtcUpnOD4u5uUNyFT4JDF+evGm3sN/XAWBCkjfoFNsXtENRdg71kVFVrPGc1QLT4lEwuzb6+uc7itBK/2rYEyY75pc1hHAIB9EEhcWbKcwuHcGKIxAC/vEv9SiW/Wb6KuXsS5aCjgKbjEpX2I+K/P/VmwyOJQNfdAT4juK+yg9Zj5QYMWgfp+8RiXmyfi3/Wn8zOOSSrS6kSA7b4=
