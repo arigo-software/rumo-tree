@@ -18,7 +18,6 @@ before_script:
   - npx polymer lint
 script:
   - xvfb-run npx polymer test
-  - if [ "${TRAVIS_BRANCH}" = "master" ] && [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then npx polymer test --plugin sauce; fi
 notifications:
   email:
     on_success: never
