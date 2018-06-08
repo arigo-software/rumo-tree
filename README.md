@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/stefanfrede/playground-polymer2.svg?branch=master)](https://travis-ci.org/stefanfrede/playground-polymer2)
-[![Build Status](https://saucelabs.com/buildstatus/stefanfrede)](https://saucelabs.com/beta/builds/70c0790efe1d45feaf73677cd6caff2b)
-
 # \<rumo-tree\>
 
 Simple Polymer tree component
