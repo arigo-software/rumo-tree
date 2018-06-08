@@ -1,6 +1,6 @@
 # \<rumo-tree\>
 
-Simple Polymer tree component
+Simple Polymer 2 tree component
 
 ## Install the Polymer-CLI
 
