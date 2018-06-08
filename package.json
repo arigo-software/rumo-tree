@@ -15,17 +15,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stefanfrede/rumo-tree.git"
+    "url": "git+https://github.com/arigo-software/rumo-tree.git"
   },
   "keywords": [
-    "polymer"
+    "Arigo",
+    "Arigo-Software",
+    "polymer",
+    "rumo-tree"
   ],
   "author": "Stefan Frede",
+  "contributors": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stefanfrede/rumo-tree/issues"
+    "url": "https://github.com/arigo-software/rumo-tree/issues"
   },
-  "homepage": "https://github.com/stefanfrede/rumo-tree#readme",
+  "homepage": "https://github.com/arigo-software/rumo-tree#readme",
   "devDependencies": {
     "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
     "bower": "^1.8.4",
