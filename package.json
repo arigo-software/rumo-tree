@@ -1,7 +1,7 @@
 {
-  "name": "playground-polymer2",
+  "name": "rumo-tree",
   "version": "1.0.0",
-  "description": "Playground for Polymer 2.0",
+  "description": "Simple Polymer 2 tree component",
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged"
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stefanfrede/playground-polymer2.git"
+    "url": "git+https://github.com/stefanfrede/rumo-tree.git"
   },
   "keywords": [
     "polymer"
@@ -23,9 +23,9 @@
   "author": "Stefan Frede",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stefanfrede/playground-polymer2/issues"
+    "url": "https://github.com/stefanfrede/rumo-tree/issues"
   },
-  "homepage": "https://github.com/stefanfrede/playground-polymer2#readme",
+  "homepage": "https://github.com/stefanfrede/rumo-tree#readme",
   "devDependencies": {
     "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
     "bower": "^1.8.4",
