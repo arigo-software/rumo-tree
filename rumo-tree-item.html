@@ -147,7 +147,7 @@
     <template is="dom-if" if="{{data.open}}">
       <div class="node__children-container">
         <template is="dom-repeat" items="{{data.children}}">
-          <rumo-tree-item data="{{item}}"></rumo-tree-item>
+          <rumo-tree-item data="{{item}}" parent="{{data.self}}"></rumo-tree-item>
         </template>
       </div>
     </template>
@@ -176,6 +176,12 @@
             computed: '_computeIcon(data.icon)',
           },
         };
+      }
+
+      ready() {
+        super.ready();
+
+        this.data.self = this;
       }
 
       _computeOpen(status, children) {
@@ -223,7 +229,7 @@
       }
 
       getParent() {
-        return this.domHost.tagName === 'RUMO-TREE-ITEM' ? this.domHost : null;
+        return this.parent;
       }
 
       getChildren() {
