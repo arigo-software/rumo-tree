@@ -154,6 +154,7 @@
   </template>
 
   <script>
+  (function() {
     class RumoTreeItem extends Polymer.Element {
       static get is() {
         return 'rumo-tree-item';
@@ -238,5 +239,6 @@
     }
 
     window.customElements.define(RumoTreeItem.is, RumoTreeItem);
+  })();
   </script>
 </dom-module>
